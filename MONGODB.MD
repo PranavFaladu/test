@@ -1,0 +1,17 @@
+db.patients.find({ status: "Admitted" }, { name: 1, patientId: 1, status: 1, admissionDate: 1, ward: 1 });
+db.doctors.find({ experience: { $gt: 10 } }, { doctorId: 1, name: 1, specialization: 1, experience: 1 });
+db.patients.find({ diagnosis: "Diabetes" }, { name: 1, patientId: 1, diagnosis: 1, medications: 1 });
+db.doctors.find({ "schedule.shift": "Morning" }, { doctorId: 1, name: 1, schedule: 1 });
+db.patients.find({ "ward.type": "ICU" }, { name: 1, patientId: 1, ward: 1 });
+db.doctors.find({ "schedule.days": "Monday" }, { doctorId: 1, name: 1, schedule: 1 });
+db.patients.find({ "ward.number": "W101" }, { name: 1, patientId: 1, ward: 1 });
+db.doctors.find({ expertise: { $all: ["COPD", "Asthma"] } }, { doctorId: 1, name: 1, expertise: 1 });
+db.patients.find({ "diagnosis.1": { $exists: true } }, { name: 1, patientId: 1, diagnosis: 1 });
+db.doctors.find({ department: "Internal Medicine" }, { doctorId: 1, name: 1, department: 1 });
+db.patients.updateOne( { patientId: "P101" }, { $push: { medications: "Metformin" } } );
+db.doctors.updateOne( { doctorId: "DOC001" }, { $set: { "schedule.consultingRoom": "R201" } } );
+db.patients.updateOne( { patientId: "P101" }, { $set: { status: "Discharged" } } );
+db.doctors.updateOne( { doctorId: "DOC001" }, { $set: { isAvailable: false } } );
+db.patients.deleteMany({ status: "Discharged" });
+db.patients.deleteMany({ insuranceActive: false });
+db.patients.updateOne( { patientId: "P101" }, { $pull: { medications: "Insulin" } } );
